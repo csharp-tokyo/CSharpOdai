@@ -22,7 +22,6 @@ public class Benchmark
     {
         return this.Invoke(DateOnlyParseExactAndToString.Instance);
     }
-    
 
     [Benchmark]
     public int ExpressionTreeBenchmark()
