@@ -1,3 +1,4 @@
+﻿using System.Globalization;
 using System.Reflection;
 
 using Microsoft.CodeAnalysis;
@@ -26,10 +27,10 @@ public sealed class Roslyn :
                 ]))
             .WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
                 SyntaxFactory
-                    .StructDeclaration(SyntaxFactory.Identifier("Roslyn"))
+                    .ClassDeclaration(SyntaxFactory.Identifier("Roslyn"))
                     .WithModifiers(SyntaxFactory.TokenList(
                         SyntaxFactory.Token(SyntaxKind.PublicKeyword),
-                        SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)))
+                        SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
                     .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(
                         [
                             SyntaxFactory
