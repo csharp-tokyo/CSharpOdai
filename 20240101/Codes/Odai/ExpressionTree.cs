@@ -11,7 +11,7 @@ public sealed class ExpressionTree :
     protected override GeneratedCode GenerateCode()
     {
         var invariantCulture = typeof(CultureInfo).GetProperty(nameof(CultureInfo.InvariantCulture));
-        var asSpan = typeof(MemoryExtensions).GetMethod("AsSpan", [typeof(string)]);
+        var asSpan = typeof(MemoryExtensions).GetMethod(nameof(MemoryExtensions.AsSpan), [typeof(string)]);
         var parseExact = typeof(DateTime).GetMethod(nameof(DateTime.ParseExact), [typeof(ReadOnlySpan<char>), typeof(ReadOnlySpan<char>), typeof(IFormatProvider), typeof(DateTimeStyles)]);
         var tryFormat = typeof(DateTime).GetMethod(nameof(DateTime.TryFormat), [typeof(Span<char>), typeof(int).MakeByRefType(), typeof(ReadOnlySpan<char>), typeof(IFormatProvider)]);
 

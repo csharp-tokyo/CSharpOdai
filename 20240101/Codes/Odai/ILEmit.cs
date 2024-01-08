@@ -19,7 +19,7 @@ public sealed class ILEmit :
         var gen = method.GetILGenerator();
 
         var invariantCulture = typeof(CultureInfo).GetProperty(nameof(CultureInfo.InvariantCulture))!.GetMethod;
-        var asSpan = typeof(MemoryExtensions).GetMethod("AsSpan", [typeof(string)]);
+        var asSpan = typeof(MemoryExtensions).GetMethod(nameof(MemoryExtensions.AsSpan), [typeof(string)]);
         var parseExact = typeof(DateTime).GetMethod(nameof(DateTime.ParseExact), [typeof(ReadOnlySpan<char>), typeof(ReadOnlySpan<char>), typeof(IFormatProvider), typeof(DateTimeStyles)]);
         var tryFormat = typeof(DateTime).GetMethod(nameof(DateTime.TryFormat), [typeof(Span<char>), typeof(int).MakeByRefType(), typeof(ReadOnlySpan<char>), typeof(IFormatProvider)]);
 

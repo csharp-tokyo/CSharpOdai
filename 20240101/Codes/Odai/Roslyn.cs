@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -60,8 +60,8 @@ public sealed class Roslyn :
                                                         SyntaxFactory.EqualsValueClause(
                                                             SyntaxFactory.MemberAccessExpression(
                                                                 SyntaxKind.SimpleMemberAccessExpression,
-                                                                SyntaxFactory.ParseTypeName("CultureInfo"),
-                                                                SyntaxFactory.IdentifierName("InvariantCulture"))))))),
+                                                                SyntaxFactory.ParseTypeName(nameof(CultureInfo)),
+                                                                SyntaxFactory.IdentifierName(nameof(CultureInfo.InvariantCulture)))))))),
                                     SyntaxFactory.ExpressionStatement(
                                         SyntaxFactory.InvocationExpression(
                                             SyntaxFactory.MemberAccessExpression(
@@ -69,15 +69,15 @@ public sealed class Roslyn :
                                                 SyntaxFactory.InvocationExpression(
                                                     SyntaxFactory.MemberAccessExpression(
                                                         SyntaxKind.SimpleMemberAccessExpression,
-                                                        SyntaxFactory.ParseName("DateTime"),
-                                                        SyntaxFactory.IdentifierName("ParseExact")),
+                                                        SyntaxFactory.ParseName(nameof(DateTime)),
+                                                        SyntaxFactory.IdentifierName(nameof(DateTime.ParseExact))),
                                                     SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(
                                                         [
                                                             SyntaxFactory.Argument(input),
                                                             SyntaxFactory.Argument(SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("MM-dd-yyyy"))),
                                                             SyntaxFactory.Argument(culture)
                                                         ]))),
-                                                SyntaxFactory.IdentifierName("TryFormat")),
+                                                SyntaxFactory.IdentifierName(nameof(DateTime.TryFormat))),
                                             SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(
                                                 [
                                                     SyntaxFactory.Argument(output),
