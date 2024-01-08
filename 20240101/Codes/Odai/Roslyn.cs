@@ -103,7 +103,7 @@ public sealed class Roslyn :
             new CSharpCompilationOptions(
                 OutputKind.DynamicallyLinkedLibrary,
                 optimizationLevel: OptimizationLevel.Release,
-                concurrentBuild: false));
+                nullableContextOptions: NullableContextOptions.Enable));
 
         using var peStream = new MemoryStream();
         using var pdbStream = new MemoryStream();
