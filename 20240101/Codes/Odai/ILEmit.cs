@@ -24,7 +24,7 @@ public sealed class ILEmit :
         var tryFormat = typeof(DateTime).GetMethod(nameof(DateTime.TryFormat), [typeof(Span<char>), typeof(int).MakeByRefType(), typeof(ReadOnlySpan<char>), typeof(IFormatProvider)]);
 
         method.DefineParameter(1, ParameterAttributes.In, "input");
-        method.DefineParameter(1, ParameterAttributes.In, "output");
+        method.DefineParameter(2, ParameterAttributes.In, "output");
 
         // CultureInfo culture;
         var culture = gen.DeclareLocal(typeof(CultureInfo));
