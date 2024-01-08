@@ -94,8 +94,6 @@ public sealed class Roslyn :
                                                             ]))))))
                                     ]))))));
 
-        var code = compilationUnit.NormalizeWhitespace().ToFullString();
-
         var syntaxTree = CSharpSyntaxTree.Create(
             compilationUnit,
             new CSharpParseOptions(
