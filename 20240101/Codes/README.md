@@ -1,6 +1,6 @@
 # お題の実装
 
-ExpressionTree、ILEmit、Roslyn はいずれも、DateTime.ParseExact / TryFormat を大袈裟にやっているだけなので、パフォーマンスでは大きな差は出ない。
+ExpressionTree、ILEmit、Roslyn はいずれも、DateTime.ParseExact / TryFormat を大袈裟にやっているだけなので、パフォーマンスでは大きな差は出ない。コードを組み立てる部分はベンチマーク外になっているし。
 
 クソコードだが、敢えてクソく書くチャレンジをすることで見えてくるものもあったりなかったりする。
 
