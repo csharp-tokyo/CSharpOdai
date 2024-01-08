@@ -15,8 +15,8 @@ public sealed class ExpressionTree :
         var parseExact = typeof(DateTime).GetMethod(nameof(DateTime.ParseExact), [typeof(ReadOnlySpan<char>), typeof(ReadOnlySpan<char>), typeof(IFormatProvider), typeof(DateTimeStyles)]);
         var tryFormat = typeof(DateTime).GetMethod(nameof(DateTime.TryFormat), [typeof(Span<char>), typeof(int).MakeByRefType(), typeof(ReadOnlySpan<char>), typeof(IFormatProvider)]);
 
-        var inputParameter = Expression.Parameter(typeof(ReadOnlySpan<char>), "input");
-        var outputParameter = Expression.Parameter(typeof(Span<char>), "output");
+        var input = Expression.Parameter(typeof(ReadOnlySpan<char>), "input");
+        var output = Expression.Parameter(typeof(Span<char>), "output");
 
         var culture = Expression.Variable(typeof(CultureInfo), "culture");
         var charsWritten = Expression.Variable(typeof(int), "charsWritten");
@@ -27,7 +27,7 @@ public sealed class ExpressionTree :
 
         var parse = Expression.Call(
             parseExact!,
-            inputParameter,
+            input,
             Expression.Call(asSpan!, Expression.Constant("MM-dd-yyyy")),
             culture,
             Expression.Constant(DateTimeStyles.None));
@@ -35,7 +35,7 @@ public sealed class ExpressionTree :
         var format = Expression.Call(
             parse,
             tryFormat!,
-            outputParameter,
+            output,
             charsWritten,
             Expression.Call(asSpan!, Expression.Constant("yyyy/MM/dd")),
             culture);
@@ -48,8 +48,8 @@ public sealed class ExpressionTree :
                 ],
                 assignment,
                 format),
-            inputParameter,
-            outputParameter);
+            input,
+            output);
 
         return lambda.Compile();
     }
