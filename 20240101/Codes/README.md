@@ -4,7 +4,7 @@ ExpressionTree、ILEmit、Roslyn はいずれも、DateTime.ParseExact / TryForm
 
 クソコードだが、敢えてクソく書くチャレンジをすることで見えてくるものもあったりなかったりする。
 
-CollectionExpression や NoAllocation は文字列操作で結果を組み立てており、DateTime のメソッドを使っていないので、速いのは当たり前。
+CollectionExpression や NoAllocation は文字列操作で結果を組み立てており、DateTime のメソッドを使っていないので、速いのは当たり前。書式チェックをしていないので、変な入力が与えられた場合は、相応に変な出力が出る。まぁそのへんの仕様はレギュレーションにないからいいよね。
 
 # ベンチマーク
 ```
