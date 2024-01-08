@@ -1,35 +1,15 @@
-﻿using System.Diagnostics;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Reflection;
 using System.Reflection.Emit;
 
 namespace Odai;
 
-public readonly struct ILEmit :
-    IOdai
+public sealed class ILEmit :
+    CodeGenerationBase
 {
-    public ILEmit()
-    {
-        this._code = GenerateCode();
-    }
-
-    public void Invoke(
-        ReadOnlySpan<char> input,
-        Span<char> output)
-    {
-        Debug.Assert(input.Length >= 10);
-        Debug.Assert(output.Length >= 10);
-
-        this._code(input, output);
-    }
-
-    private delegate void GeneratedCode(ReadOnlySpan<char> input, Span<char> output);
-
-    private readonly GeneratedCode _code;
-
     public static readonly ILEmit Instance = new();
 
-    private static GeneratedCode GenerateCode()
+    protected override GeneratedCode GenerateCode()
     {
         var method = new DynamicMethod("Odai", typeof(void), [typeof(ReadOnlySpan<char>), typeof(Span<char>)])
         {

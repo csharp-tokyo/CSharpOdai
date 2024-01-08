@@ -1,6 +1,6 @@
 # お題の実装
 
-ExpressionTree、ILEmit、Roslyn はいずれも、DateTime.ParseExact / TryFormat を大袈裟にやっているだけなので、パフォーマンスでは大きな差は出ない。コードを組み立てる部分はベンチマーク外になっているし。
+ExpressionTree、ILEmit、Roslyn はいずれも、DateTime.ParseExact / TryFormat を大袈裟にやっているだけなので、パフォーマンスでは大きな差は出ない。
 
 クソコードだが、敢えてクソく書くチャレンジをすることで見えてくるものもあったりなかったりする。
 
@@ -16,10 +16,10 @@ Unknown processor
 ```
 | Method                                 | Iteration | Mean        | Error     | StdDev    | Gen0   | Allocated |
 |--------------------------------------- |---------- |------------:|----------:|----------:|-------:|----------:|
-| DateTimeParseExactAndToStringBenchmark | 10        | 1,826.88 ns | 11.324 ns |  9.456 ns |      - |         - |
-| DateOnlyParseExactAndToStringBenchmark | 10        | 2,027.01 ns |  2.800 ns |  2.338 ns |      - |         - |
-| ExpressionTreeBenchmark                | 10        | 1,835.83 ns | 10.721 ns | 10.029 ns |      - |         - |
-| ILEmitBenchmark                        | 10        | 1,854.80 ns |  8.370 ns |  7.420 ns |      - |         - |
-| RoslynBenchmark                        | 10        | 1,894.37 ns | 36.743 ns | 46.468 ns |      - |         - |
-| CollectionExpressionBenchmark          | 10        |   591.12 ns | 10.737 ns |  9.518 ns | 0.1984 |    2080 B |
-| NoAllocationBenchmark                  | 10        |    10.19 ns |  0.014 ns |  0.011 ns |      - |         - |
+| DateTimeParseExactAndToStringBenchmark | 10        | 1,824.21 ns | 17.814 ns | 16.663 ns |      - |         - |
+| DateOnlyParseExactAndToStringBenchmark | 10        | 2,035.98 ns | 21.337 ns | 17.818 ns |      - |         - |
+| ExpressionTreeBenchmark                | 10        | 2,063.49 ns | 10.213 ns |  8.528 ns | 0.0610 |     640 B |
+| ILEmitBenchmark                        | 10        | 2,052.24 ns | 15.267 ns | 13.534 ns | 0.0610 |     640 B |
+| RoslynBenchmark                        | 10        | 2,059.22 ns |  7.639 ns |  6.379 ns | 0.0610 |     640 B |
+| CollectionExpressionBenchmark          | 10        |   622.06 ns |  8.712 ns |  7.723 ns | 0.1984 |    2080 B |
+| NoAllocationBenchmark                  | 10        |    10.28 ns |  0.036 ns |  0.028 ns |      - |         - |

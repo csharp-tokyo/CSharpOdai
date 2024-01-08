@@ -23,8 +23,8 @@ public class OdaiTest
         yield return [DateOnlyParseExactAndToString.Instance];
         yield return [ExpressionTree.Instance];
         yield return [ILEmit.Instance];
+        yield return [Roslyn.Instance];
         yield return [CollectionExpression.Instance];
         yield return [NoAllocation.Instance];
-        yield return [Roslyn.Instance];
     }
 }
