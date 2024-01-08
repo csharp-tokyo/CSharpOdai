@@ -9,6 +9,7 @@ public readonly struct ExpressionTree :
 {
     public ExpressionTree()
     {
+        this._code = GenerateCode();
     }
 
     public void Invoke(
@@ -23,11 +24,11 @@ public readonly struct ExpressionTree :
 
     private delegate void GeneratedCode(ReadOnlySpan<char> input, Span<char> output);
 
-    private readonly GeneratedCode _code = CreateCode();
+    private readonly GeneratedCode _code;
 
     public static readonly ExpressionTree Instance = new();
 
-    private static GeneratedCode CreateCode()
+    private static GeneratedCode GenerateCode()
     {
         var invariantCulture = typeof(CultureInfo).GetProperty(nameof(CultureInfo.InvariantCulture));
         var asSpan = typeof(MemoryExtensions).GetMethod("AsSpan", [typeof(string)]);

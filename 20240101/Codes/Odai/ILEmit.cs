@@ -10,6 +10,7 @@ public readonly struct ILEmit :
 {
     public ILEmit()
     {
+        this._code = GenerateCode();
     }
 
     public void Invoke(
@@ -24,11 +25,11 @@ public readonly struct ILEmit :
 
     private delegate void GeneratedCode(ReadOnlySpan<char> input, Span<char> output);
 
-    private readonly GeneratedCode _code = CreateCode();
+    private readonly GeneratedCode _code;
 
     public static readonly ILEmit Instance = new();
 
-    private static GeneratedCode CreateCode()
+    private static GeneratedCode GenerateCode()
     {
         var method = new DynamicMethod("Odai", typeof(void), [typeof(ReadOnlySpan<char>), typeof(Span<char>)])
         {
@@ -58,7 +59,7 @@ public readonly struct ILEmit :
         gen.Emit(OpCodes.Call, invariantCulture!);
         gen.Emit(OpCodes.Stloc, culture);
 
-        // datetime = DateTime.ParseExact(value, "MM-dd-yyyy".AsSpan(), culture, DateTimeStyles.None);
+        // datetime = DateTime.ParseExact(input, "MM-dd-yyyy".AsSpan(), culture, DateTimeStyles.None);
         gen.Emit(OpCodes.Ldarg_0);
         gen.Emit(OpCodes.Ldstr, "MM-dd-yyyy");
         gen.Emit(OpCodes.Call, asSpan!);

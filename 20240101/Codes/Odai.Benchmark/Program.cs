@@ -37,6 +37,12 @@ public class Benchmark
     }
 
     [Benchmark]
+    public int RoslynBenchmark()
+    {
+        return this.Invoke(Odai.Roslyn.Instance);
+    }
+
+    [Benchmark]
     public int CollectionExpressionBenchmark()
     {
         return this.Invoke(CollectionExpression.Instance);

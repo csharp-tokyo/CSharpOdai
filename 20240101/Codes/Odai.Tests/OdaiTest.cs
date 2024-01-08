@@ -6,8 +6,9 @@ public class OdaiTest
 {
     [Theory]
     [MemberData(nameof(GetImplementations))]
-    public void Test(
-        IOdai implementation)
+    public void Test<T>(
+        T implementation)
+        where T : IOdai
     {
         Span<char> output = stackalloc char[10];
 
@@ -24,5 +25,6 @@ public class OdaiTest
         yield return [ILEmit.Instance];
         yield return [CollectionExpression.Instance];
         yield return [NoAllocation.Instance];
+        yield return [Roslyn.Instance];
     }
 }
