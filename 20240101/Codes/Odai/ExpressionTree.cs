@@ -16,25 +16,38 @@ public sealed class ExpressionTree :
         var tryFormat = typeof(DateTime).GetMethod(nameof(DateTime.TryFormat), [typeof(Span<char>), typeof(int).MakeByRefType(), typeof(ReadOnlySpan<char>), typeof(IFormatProvider)]);
 
         var inputParameter = Expression.Parameter(typeof(ReadOnlySpan<char>), "input");
-        var outputParameter = Expression.Parameter(typeof(Span<char>), "input");
-        var culture = Expression.Property(null, invariantCulture!);
+        var outputParameter = Expression.Parameter(typeof(Span<char>), "output");
+
+        var culture = Expression.Variable(typeof(CultureInfo), "culture");
         var charsWritten = Expression.Variable(typeof(int), "charsWritten");
+
+        var assignment = Expression.Assign(
+            culture,
+            Expression.Property(null, invariantCulture!));
+
+        var parse = Expression.Call(
+            parseExact!,
+            inputParameter,
+            Expression.Call(asSpan!, Expression.Constant("MM-dd-yyyy")),
+            culture,
+            Expression.Constant(DateTimeStyles.None));
+
+        var format = Expression.Call(
+            parse,
+            tryFormat!,
+            outputParameter,
+            charsWritten,
+            Expression.Call(asSpan!, Expression.Constant("yyyy/MM/dd")),
+            culture);
 
         var lambda = Expression.Lambda<GeneratedCode>(
             Expression.Block(
-                [charsWritten],
-                Expression.Call(
-                    Expression.Call(
-                        parseExact!,
-                        inputParameter,
-                        Expression.Call(asSpan!, Expression.Constant("MM-dd-yyyy")),
-                        culture,
-                        Expression.Constant(DateTimeStyles.None)),
-                    tryFormat!,
-                    outputParameter,
-                    charsWritten,
-                    Expression.Call(asSpan!, Expression.Constant("yyyy/MM/dd")),
-                    culture)),
+                [
+                    culture,
+                    charsWritten
+                ],
+                assignment,
+                format),
             inputParameter,
             outputParameter);
 
