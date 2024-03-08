@@ -1,0 +1,11 @@
+/.vs/
+/artifacts/
+bin/
+obj/
+TestResults/
+
+*.log
+*.binlog
+
+*.user
+launchSettings.json
