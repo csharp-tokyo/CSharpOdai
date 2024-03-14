@@ -1,0 +1,12 @@
+<Project>
+  <ItemGroup Condition="'$(CLSCompliant)' != ''">
+    <AssemblyAttribute Include="System.CLSCompliantAttribute">
+      <_Parameter1>$(CLSCompliant)</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(ExcludeFromCodeCoverage)' == 'true'">
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+  </ItemGroup>
+
+</Project>
