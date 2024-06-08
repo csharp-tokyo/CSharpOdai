@@ -21,11 +21,25 @@ C# Tokyo コミュニティの新企画です。管理メンバーがプログ�
 - C# で電卓アプリを書いてください。
 
 # 例
-製作中......
+電卓アプリは非常に難しいので、このサンプルでは電卓とは言えないですが計算部分をごまかす方法のサンプルです。  
+計算ではない部分にこだわりたい場合は参考にしてください。
+```cs
+using (System.Data.DataTable dt = new())
+using (System.Data.DataColumn col = new("a") { Expression = args.FirstOrDefault() })
+{
+    dt.Columns.Add(col); dt.Rows.Add(dt.NewRow());
+    Console.WriteLine(dt.Rows[0][0]);
+}
+```
 
 ## 実行例
-製作中.....  
-[製作中......]()  
+PowerSell
+```ps1
+./Sample.exe "1+(2*3)/3"
+2
+```
+
+[サンプルプロジェクト](./Sample)  
 
 # 発表方法
 いただいたコードは C# Tokyo イベントの配信中に発表することがあります。  
